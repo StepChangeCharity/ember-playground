@@ -1,53 +1,115 @@
-# Ember-playground
-
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+# ember.js Playground
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+* NodeJS
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+## Notes
 
-## Installation
+The app connects to a custom local Node server.
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+We can set one up using the commands
 
-## Running / Development
+```
+$ npm init
+$ npm install sockjs --save
+```
 
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+and in app.js,
 
-### Code Generators
+```
+// app.js
+var http = require('http');  
+var sockjs = require('sockjs');
 
-Make use of the many generators for code, try `ember help generate` for more details
 
-### Running Tests
+var clients = {};
 
-* `ember test`
-* `ember test --server`
+// Broadcast to all clients
+function broadcast(message){  
+  // iterate through each client in clients object
+  for (var client in clients){
+    // send the message to that client
+    clients[client].write(message);
+  }
+}
 
-### Building
+var echo = sockjs.createServer({ sockjs_url: 'http://cdn.jsdelivr.net/sockjs/1.0.1/sockjs.min.js' });  
+echo.on('connection', function(conn) {  
+    clients[conn.id] = conn;
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+    conn.on('data', function(message) {
+        console.log('received ' + message);
+        broadcast(message);
+    });
+    conn.on('close', function() {
+        delete clients[conn.id];
+        });
+    console.log("connected");
+});
 
-### Deploying
+var server = http.createServer();  
+echo.installHandlers(server, {prefix:'/echo'});  
+server.listen(7000, '0.0.0.0');
+```
 
-Specify what it takes to deploy your app.
+At the moment this just echoes any message it receives back to any subscribed clients.
 
-## Further Reading / Useful Links
+The sockjs package was installed in this projust using Bower.
 
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+The SockJS package, being a non-AMD asset, is imported in the ember-cli-build.js thusly:
+
+```
+// ember-cli-build.js"
+...
+ app.import('bower_components/sockjs/sockjs.min.js');
+...
+```
+		
+making SockJS a global variable usable anywhere in the application without an import statement.
+
+JSHint tends to complain anytime SockJS is used in the application, which we can fix by including the comment
+
+```
+/* global SockJS */
+```
+		
+to the top of any file it's used in.
+
+The Ember CLI Content Security Policy will also throw up some complaints - have added this to the config/environment.js file:
+
+```
+// config/environment.js
+...
+APP: {  
+      // Here you can pass flags/options to your application instance
+      // when it is created
+    },
+           contentSecurityPolicy: {
+              'default-src': "'none'",
+              'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
+              'font-src': "'self'",
+              'connect-src': "'self' ws://localhost:7000 localhost:7000",
+              'img-src': "'self'",
+              'report-uri':"'localhost'",
+              'style-src': "'self' 'unsafe-inline'",
+              'frame-src': "'none'"
+            }
+...
+```
+The above may not be immediately apparent from looking at the project files.
+I have tried to document the routing, templates, components and services files as fully as possible.
+
+The jsconfig.json file in the project root target the app for ES6, so you won't get syntax errors while editing in VS Code.
+
+```
+{
+    "compilerOptions": {
+        "target": "ES6"
+    }
+}
+```
+ 
+	 
+	
 
