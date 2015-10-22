@@ -1,0 +1,119 @@
+.css-login-form {
+	width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    color: #0074D9;
+    border: 2px solid #0074D9;
+    border-radius: 12px;
+    background-color: white;
+}
+
+.css-login-form .login-title {
+    font-size: 22px;
+    color: #00427D;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #0074D9;
+}
+
+.css-login-form .login-input {
+    font-size: 18px;
+    color: #0074D9;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 26px;
+}
+
+.css-login-form .login-input input[type=text]
+{
+    background-color: white;
+    border: solid 2px #0074D9;
+    border-radius: 6px;
+    color:#00427D;
+    height: 25px;
+    padding-left:10px;
+    width: 200px;
+}
+
+.css-login-form .login-buttons {
+    
+    border-top: 2px solid #0074D9;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.css-login-form .login-buttons .inputform-button{
+    
+    padding: 10px;
+    background: #3498db;
+    background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+    background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+    background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+    background-image: -o-linear-gradient(top, #3498db, #2980b9);
+    background-image: linear-gradient(to bottom, #3498db, #2980b9);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 22px;
+}
+
+.css-login-form .login-buttons .inputform-button:hover{
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+}
+
+.css-details-panel {
+	width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    color: #0074D9;
+    border: 2px solid #2496FC;
+    border-radius: 12px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.css-details-panel .user-title {
+    font-size: 22px;
+    color: #B10DC9;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #0074D9;
+}
+
+.users-header {
+    width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 22px;
+    color: #00427D;
+}
+
+.users-no-users {
+    width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 22px;
+    color: #B10DC9;
+}
+
+.user-password {
+    color: #CB5CDA;
+}

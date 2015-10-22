@@ -1,8 +1,8 @@
-<p>Current users:</p>
+<p class='users-header'>current users:</p>
 
 {{#each model as |user|}}
 <div>
-	<p>{{user.username}}</p>
-	<p>{{user.password}}</p>
+	{{user-details user=user}}
 </div>
+{{else}}<p class='users-no-users'>no clients</p>
 {{/each}}

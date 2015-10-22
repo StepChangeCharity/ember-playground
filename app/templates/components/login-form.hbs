@@ -1,14 +1,15 @@
-<p>
+<div class='login-title'>welcome to loginner&#8482;</div>
+<div class='login-input'>
 	<label>Username</label><br>
 	{{input type="text" value=inpUsername}}
-</p>
-<p>
+</div><div class='login-input'>
 	<label>Password</label><br>
 	{{input type="text" value=inpPassword}}
-</p>
-<p>
+</div>
+<div class='login-buttons'>
 	{{! Calls the action 'submitForm' in the component code at app/components/login-form.js}}
 	{{! Passes the text from the two input fields above as parameters}}
 	{{! and emits an event to be picked up by the socks.js service at app/services}}
-	<button {{action 'submitForm' inpUsername inpPassword}}>Submit</button>
-</p>
+	<button class='inputform-button'>log in</button>
+	<button class='inputform-button' {{action 'submitForm' inpUsername inpPassword}}>create new</button>
+</div>

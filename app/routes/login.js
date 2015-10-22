@@ -6,16 +6,7 @@ import Ember from 'ember';
 //   observes the messageReceived event firing on the sockjs service.
 export default Ember.Route.extend({  
     model() {
-        let users = [
-            {
-                username: 'davidk',
-                password: 'password1'
-            },
-            {
-                username: 'dkane',
-                password: 'password2'
-            }
-        ];
+        let users = [];
         return users;
     }
 });
